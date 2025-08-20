@@ -10,15 +10,37 @@
                         ],
                         "url": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainerFeature.schema.json"
                     }
-                ]
+                ],
+                "nix.enableLanguageServer": true,
+                "nix.serverPath": "nixd",
+                "nix.serverSettings": {
+                    "nixd": {
+                        "formatting": {
+                            "command": [
+                                "nixfmt"
+                            ]
+                        }
+                    }
+                }
             },
             "extensions": [
+                "jnoortheen.nix-ide",
                 "mads-hartmann.bash-ide-vscode"
             ]
         }
     },
     "features": {
-        "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+        "ghcr.io/devcontainers/features/common-utils": {
+            "configureZshAsDefaultShell": true,
+            "installOhMyZsh": true
+        },
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+        "ghcr.io/devcontainers/features/nix:1": {
+            "multiUser": true,
+            "packages": "nixpkgs.nixd,nixpkgs.nixfmt-rfc-style",
+            "useAttributePath": true,
+            "version": "latest"
+        }
     },
     "remoteUser": "node",
     "updateContentCommand": "npm install -g @devcontainers/cli"
