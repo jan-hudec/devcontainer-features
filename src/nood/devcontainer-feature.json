@@ -1,0 +1,29 @@
+{
+    "name": "Nix Out Of Docker",
+    "id": "nood",
+    "version": "0.1.0",
+    "description": "Mounts /nix into the container and sets up selected profile",
+    "options": {
+        "profile": {
+            "type": "string",
+            "proposals": [
+                "user-default",
+                "container-specific"
+            ],
+            "default": "container-specific",
+            "description": "Profile to set up"
+        }
+    },
+    "mounts": [
+        {
+            "source": "/nix",
+            "target": "/nix",
+            "type": "bind"
+        },
+        {
+            "source": "${localEnv:HOME}/.local/state/nix/profiles",
+            "target": "/outer-profiles",
+            "type": "bind"
+        }
+    ]
+}
