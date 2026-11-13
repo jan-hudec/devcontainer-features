@@ -45,5 +45,10 @@
         }
     },
     "remoteUser": "node",
-    "updateContentCommand": "npm install -g @devcontainers/cli"
+    "updateContentCommand": {
+        // There's no feature for this, so …
+        "devcontainer-cli": "npm install -g @devcontainers/cli",
+        // Ensure the profile exists without needing to install anything
+        "nix-profile": "nix-env -i $(nix-instantiate -E 'with import <nixpkgs> {}; buildEnv { name = \"profile\"; paths = []; }')"
+    }
 }
